@@ -27,7 +27,7 @@ export interface IProductDetails {
   brand: string;
   id: string;
 }
-export interface IProductList {
+export interface IProductListItem {
   createdAt: string;
   name: string;
   image: string;

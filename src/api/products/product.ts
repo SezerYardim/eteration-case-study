@@ -2,12 +2,12 @@ import { httpClient } from "../httpClient";
 import {
   IProductDetails,
   IProductFilter,
-  IProductList,
+  IProductListItem,
 } from "./products.interface";
 
 export function getProductList(
   queryParams?: IProductFilter
-): Promise<IProductList> {
+): Promise<IProductListItem[]> {
   return httpClient
     .get("/products", { params: queryParams })
     .then((resp) => resp.data);
