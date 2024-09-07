@@ -1,11 +1,11 @@
 import { Box, Card, CardContent, Typography } from "@mui/material";
 import CartNumberInput from "./CartNumberInput";
-interface CartCardInputProps {
+interface CartProps {
   name: string;
   price: string;
   count: number;
 }
-export default function CartCard({ name, count, price }: CartCardInputProps) {
+export default function Cart({ name, count, price }: CartProps) {
   return (
     <Box sx={{ marginBottom: "12px" }}>
       <Typography component={"p"} variant="subtitle1" color="textSecondary">

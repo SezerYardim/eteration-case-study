@@ -8,14 +8,14 @@ import {
   RadioGroup,
 } from "@mui/material";
 
-export default function SortByFormCard() {
+export default function SortByFilter() {
   return (
     <FormControl sx={{ display: "block", marginBottom: "12px" }}>
-      <FormLabel id="radio-buttons-group-label">Sort by</FormLabel>
+      <FormLabel id="sort-by-filter-group-label">Sort by</FormLabel>
       <Card>
         <CardContent>
           <RadioGroup
-            aria-labelledby="radio-buttons-group-label"
+            aria-labelledby="sort-by-filter-group-label"
             defaultValue="dateDesc"
             name="radio-buttons-group"
           >

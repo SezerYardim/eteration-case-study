@@ -1,8 +1,8 @@
 import { Box, Button, Card, CardContent, Typography } from "@mui/material";
-interface CheckoutCardProps {
+interface CheckoutProps {
   price: number;
 }
-export default function CheckoutCard({ price }: CheckoutCardProps) {
+export default function Checkout({ price }: CheckoutProps) {
   return (
     <Box>
       <Typography component={"p"} variant="subtitle1" color="textSecondary">

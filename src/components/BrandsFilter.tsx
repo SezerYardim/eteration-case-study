@@ -46,10 +46,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
-export default function BrandsFormCard() {
+export default function BrandsFilter() {
   return (
     <FormControl sx={{ display: "block", marginBottom: "12px" }}>
-      <FormLabel id="brands-form-card-label">Brands</FormLabel>
+      <FormLabel id="brands-filter-card-label">Brands</FormLabel>
       <Card>
         <CardContent>
           <Search>
@@ -62,7 +62,7 @@ export default function BrandsFormCard() {
             />
           </Search>
           <RadioGroup
-            aria-labelledby="brands-form-card-label"
+            aria-labelledby="brands-filter-card-label"
             defaultValue="apple"
             name="brands-filter"
           >
