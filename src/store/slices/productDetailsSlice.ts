@@ -1,37 +1,47 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IProductDetails } from "../../api/products/products.interface";
+import { IProductItem } from "../../api/products/products.interface";
 import { StateType } from "../sagas";
 
-type IProductDetailsState = StateType<IProductDetails>;
+type IProductDetailsState = {
+  id: string;
+  state: StateType<IProductItem>;
+};
 const initialState: IProductDetailsState = {
-  data: null,
-  errors: "",
-  isLoading: false,
+  id: "",
+  state: {
+    data: null,
+    errors: "",
+    isLoading: false,
+  },
 };
 
 export const productDetailsSlice = createSlice({
   name: "productDetails",
   initialState,
   reducers: {
-    getProductDetailsRequest(state: IProductDetailsState) {
-      state.isLoading = true;
-      state.errors = "";
+    getProductDetailsRequest(
+      draft: IProductDetailsState,
+      { payload: id }: PayloadAction<string>
+    ) {
+      draft.state.isLoading = true;
+      draft.state.errors = "";
+      draft.id = id;
     },
     getProductDetailsRequestSuccess(
-      state: IProductDetailsState,
-      { payload }: PayloadAction<IProductDetails>
+      draft: IProductDetailsState,
+      { payload }: PayloadAction<IProductItem>
     ) {
-      state.data = payload;
-      state.errors = "";
-      state.isLoading = false;
+      draft.state.data = payload;
+      draft.state.errors = "";
+      draft.state.isLoading = false;
     },
     getProductDetailsRequestError(
-      state: IProductDetailsState,
+      draft: IProductDetailsState,
       { payload }: PayloadAction<string>
     ) {
-      state.isLoading = false;
-      state.errors = payload;
-      state.data = null;
+      draft.state.isLoading = false;
+      draft.state.errors = payload;
+      draft.state.data = null;
     },
   },
 });

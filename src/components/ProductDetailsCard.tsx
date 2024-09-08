@@ -1,13 +1,13 @@
 import { Box, Button, Card, Typography } from "@mui/material";
+import { IProductItem } from "../api/products/products.interface";
+
 interface ProductDetailsCardProps {
-  name: string;
-  price: number;
-  description: string;
+  product: IProductItem;
+  onAddToCart(): void;
 }
 export default function ProductDetailsCard({
-  description,
-  name,
-  price,
+  product: { image, name, price, description },
+  onAddToCart,
 }: ProductDetailsCardProps) {
   return (
     <Card
@@ -18,25 +18,25 @@ export default function ProductDetailsCard({
         minHeight: "320px",
       }}
     >
-      <Box flex={1} component={"img"} alt="Product Image" src=""></Box>
-      <Box className="space-y-4" flex={1} height={"99px"}>
+      <Box flex={1} component={"img"} alt="Product Image" src={image}></Box>
+      <Box className="space-y-4 pb-2.5 px-2.5" flex={1} height={"99px"}>
         <Box>
           <Typography
             sx={{ display: "block" }}
-            variant="caption"
+            variant="h5"
             color="textPrimary"
           >
             {name}
           </Typography>
-          <Typography
-            sx={{ display: "block" }}
-            variant="caption"
-            color="primary"
-          >
+          <Typography sx={{ display: "block" }} variant="h5" color="primary">
             {price}
           </Typography>
         </Box>
-        <Button sx={{ display: "block" }} variant="contained">
+        <Button
+          sx={{ display: "block", width: "100%" }}
+          variant="contained"
+          onClick={onAddToCart}
+        >
           Add to Cart
         </Button>
         <Typography
