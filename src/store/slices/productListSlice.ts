@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IProductItem } from "../../api/products/products.interface";
 import { StateType } from "../sagas";
-import { IFilterType } from "./filterSlice";
 
 export type IProductListState = StateType<IProductItem[]>;
 const initialState: IProductListState = {
@@ -42,9 +41,3 @@ export const {
   getProductListRequestSuccess,
 } = productListSlice.actions;
 export default productListSlice.reducer;
-
-export function getProductListActionCreator({
-  payload: queryParams,
-}: PayloadAction<IFilterType>) {
-  return { type: "FETCH_PRODUCT_LIST", payload: queryParams.filter };
-}

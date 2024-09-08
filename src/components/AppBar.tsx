@@ -7,12 +7,14 @@ import Button from "@mui/material/Button";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
-import { useAppSelector } from "../store/hooks";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { setSearchText } from "../store/slices/filterSlice";
 import SearchInput from "./SearchInput";
 
 export default function PrimarySearchAppBar() {
   const navigate = useNavigate();
   const checkout = useAppSelector((state) => state.cart.checkout);
+  const dispatch = useAppDispatch();
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -28,17 +30,13 @@ export default function PrimarySearchAppBar() {
             >
               Eteration
             </Typography>
-            <form
-              onSubmit={(event) => {
-                event.preventDefault();
-                console.log(event);
+            <SearchInput
+              placeholder="Search…"
+              inputProps={{ "aria-label": "search" }}
+              onChange={(event) => {
+                dispatch(setSearchText(event.target.value));
               }}
-            >
-              <SearchInput
-                placeholder="Search…"
-                inputProps={{ "aria-label": "search" }}
-              />
-            </form>
+            />
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: "flex" }}>
               <Button

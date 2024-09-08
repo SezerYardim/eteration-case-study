@@ -1,4 +1,9 @@
-import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {
+  createAction,
+  createSelector,
+  createSlice,
+  PayloadAction,
+} from "@reduxjs/toolkit";
 import { IProductFilter } from "../../api/products/products.interface";
 import { RootState } from "../store";
 
@@ -20,6 +25,8 @@ export type IFilterType = {
   };
   searchBrand: string;
   searchModel: string;
+  selectedSort: string;
+  size: number;
 };
 
 const initialState: IFilterType = {
@@ -45,6 +52,8 @@ const initialState: IFilterType = {
   },
   searchBrand: "",
   searchModel: "",
+  selectedSort: "dateAsc",
+  size: 0,
 };
 
 export const filterSlice = createSlice({
@@ -88,8 +97,11 @@ export const filterSlice = createSlice({
       state: IFilterType,
       { payload }: PayloadAction<BrandFilter>
     ) {
+      const filter = { ...state.filter, ...payload };
+      filter.p = 1;
+      filter.search = "";
       state.selectedBrand = payload;
-      state.filter = { ...state.filter, ...payload };
+      state.filter = filter;
       state.filter.model = "";
     },
     setSelectedModel(
@@ -97,6 +109,8 @@ export const filterSlice = createSlice({
       { payload }: PayloadAction<ModelFilter>
     ) {
       state.selectedModel = payload;
+      state.filter.search = "";
+      state.filter.p = 1;
       state.filter = { ...state.filter, ...payload };
     },
     changeCurrentPage(
@@ -121,6 +135,7 @@ export const filterSlice = createSlice({
       state: IFilterType,
       { payload: sortBy }: PayloadAction<string>
     ) {
+      state.selectedSort = sortBy;
       switch (sortBy) {
         case "dateDesc":
           state.filter.orderBy = "createdAt";
@@ -144,6 +159,21 @@ export const filterSlice = createSlice({
           break;
       }
     },
+    setSearchText(
+      state: IFilterType,
+      { payload: searchText }: PayloadAction<string>
+    ) {
+      const filter = { ...initialState.filter };
+      filter.search = searchText;
+      filter.l = undefined;
+      state.filter = filter;
+      state.selectedSort = "dateAsc";
+      state.selectedBrand.brand = "";
+      state.selectedModel.model = "";
+    },
+    setSize(state: IFilterType, { payload: size }: PayloadAction<number>) {
+      state.size = size;
+    },
   },
 });
 
@@ -158,6 +188,8 @@ export const {
   setSearchBrand,
   setSearchModel,
   setSortByFilter,
+  setSearchText,
+  setSize,
 } = filterSlice.actions;
 export default filterSlice.reducer;
 
@@ -178,3 +210,5 @@ export const getModels = createSelector(
     });
   }
 );
+
+export const getSize = createAction<void, string>("getSize");
