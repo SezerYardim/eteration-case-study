@@ -1,10 +1,7 @@
 import { PayloadAction } from "@reduxjs/toolkit";
-import { call, put, select, takeEvery } from "redux-saga/effects";
+import { call, put, takeEvery } from "redux-saga/effects";
 import { getProductList } from "../../api/products/product";
-import {
-  IProductFilter,
-  IProductItem,
-} from "../../api/products/products.interface";
+import { IProductItem } from "../../api/products/products.interface";
 import {
   BrandFilter,
   changeCurrentPage,
@@ -19,8 +16,7 @@ import {
 import { getProductListRequest } from "../slices/productListSlice";
 
 export function* filterSaga() {
-  const filter: IProductFilter = yield select((state) => state.filter.filter);
-  yield put(getProductListRequest(filter));
+  yield put(getProductListRequest());
 }
 
 export function* setBrandsSaga() {
@@ -31,11 +27,10 @@ export function* setBrandsSaga() {
 }
 
 export function* setSelectedBrandSaga({ payload }: PayloadAction<BrandFilter>) {
-  const filter: IProductFilter = yield select((state) => state.filter.filter);
   const productList: IProductItem[] = yield call(getProductList, payload);
   const models = productList.map((item) => item.model);
   const uniqueModels = [...new Set(models)];
-  yield put(getProductListRequest(filter));
+  yield put(getProductListRequest());
   yield put(setModels(uniqueModels));
 }
 

@@ -55,6 +55,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function ModelFilter() {
   const dispatch = useAppDispatch();
   const state = useAppSelector((state) => state);
+  const selectedModel = useAppSelector((state) => state.filter.selectedModel);
   const models = getModels(state);
   return (
     <FormControl sx={{ display: "block", marginBottom: "12px" }}>
@@ -78,6 +79,7 @@ export default function ModelFilter() {
             aria-labelledby="model-filter-label"
             defaultValue=""
             name="brands-filter"
+            value={selectedModel.model}
             onChange={(event) =>
               dispatch(
                 setSelectedModel({

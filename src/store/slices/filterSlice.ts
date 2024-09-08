@@ -27,7 +27,7 @@ const initialState: IFilterType = {
     search: undefined,
     l: 12,
     sortBy: undefined,
-    order: "desc",
+    order: "asc",
     orderBy: "createdAt",
     p: 1,
   },

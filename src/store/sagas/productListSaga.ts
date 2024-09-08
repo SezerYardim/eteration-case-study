@@ -1,5 +1,4 @@
-import { PayloadAction } from "@reduxjs/toolkit";
-import { call, put, takeLatest } from "redux-saga/effects";
+import { call, put, select, takeLatest } from "redux-saga/effects";
 import { getProductList } from "../../api/products/product";
 import {
   IProductFilter,
@@ -11,11 +10,10 @@ import {
   getProductListRequestSuccess,
 } from "../slices/productListSlice";
 
-export function* productListSaga({
-  payload: queryParams,
-}: PayloadAction<IProductFilter>) {
+export function* productListSaga() {
   try {
-    const productList: IProductItem[] = yield call(getProductList, queryParams);
+    const filter: IProductFilter = yield select((state) => state.filter.filter);
+    const productList: IProductItem[] = yield call(getProductList, filter);
     yield put(getProductListRequestSuccess(productList));
   } catch (error) {
     yield put(getProductListRequestError((error as unknown as Error).message));

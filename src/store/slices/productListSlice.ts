@@ -1,8 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import {
-  IProductFilter,
-  IProductItem,
-} from "../../api/products/products.interface";
+import { IProductItem } from "../../api/products/products.interface";
 import { StateType } from "../sagas";
 import { IFilterType } from "./filterSlice";
 
@@ -16,11 +13,7 @@ export const productListSlice = createSlice({
   name: "productList",
   initialState,
   reducers: {
-    getProductListRequest(
-      state: IProductListState,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      { payload:_ }: PayloadAction<Partial<IProductFilter>>
-    ) {
+    getProductListRequest(state: IProductListState) {
       state.errors = "";
       state.isLoading = true;
     },

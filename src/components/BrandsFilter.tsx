@@ -55,6 +55,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function BrandsFilter() {
   const dispatch = useAppDispatch();
   const state = useAppSelector((state) => state);
+  const selectedBrand = useAppSelector((state) => state.filter.selectedBrand);
   const brands = getBrands(state);
   return (
     <FormControl sx={{ display: "block", marginBottom: "12px" }}>
@@ -76,6 +77,7 @@ export default function BrandsFilter() {
             aria-labelledby="brands-filter-card-label"
             defaultValue=""
             name="brands-filter"
+            value={selectedBrand.brand}
             onChange={(event) =>
               dispatch(
                 setSelectedBrand({
