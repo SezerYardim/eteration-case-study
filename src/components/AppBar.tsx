@@ -1,102 +1,18 @@
-import MoreIcon from "@mui/icons-material/MoreVert";
 import PersonIconOutlined from "@mui/icons-material/PersonOutlined";
 import WalletIconOutlined from "@mui/icons-material/WalletOutlined";
 import { Container } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../store/hooks";
 import SearchInput from "./SearchInput";
 
 export default function PrimarySearchAppBar() {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
-    React.useState<null | HTMLElement>(null);
   const navigate = useNavigate();
   const checkout = useAppSelector((state) => state.cart.checkout);
-
-  const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
-  };
-
-  const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
-
-  const menuId = "primary-search-account-menu";
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
-  );
-
-  const mobileMenuId = "primary-search-account-menu-mobile";
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <Button
-          startIcon={<WalletIconOutlined />}
-          size="medium"
-          sx={{ color: "black" }}
-        >
-          Messages
-        </Button>
-      </MenuItem>
-      <MenuItem>
-        <Button
-          startIcon={<PersonIconOutlined />}
-          size="medium"
-          sx={{ color: "black" }}
-        >
-          Notifications
-        </Button>
-      </MenuItem>
-    </Menu>
-  );
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -112,12 +28,19 @@ export default function PrimarySearchAppBar() {
             >
               Eteration
             </Typography>
-            <SearchInput
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
+            <form
+              onSubmit={(event) => {
+                event.preventDefault();
+                console.log(event);
+              }}
+            >
+              <SearchInput
+                placeholder="Search…"
+                inputProps={{ "aria-label": "search" }}
+              />
+            </form>
             <Box sx={{ flexGrow: 1 }} />
-            <Box sx={{ display: { xs: "none", md: "flex" } }}>
+            <Box sx={{ display: "flex" }}>
               <Button
                 startIcon={<WalletIconOutlined />}
                 sx={{ color: "white" }}
@@ -132,23 +55,9 @@ export default function PrimarySearchAppBar() {
                 Kerem
               </Button>
             </Box>
-            <Box sx={{ display: { xs: "flex", md: "none" } }}>
-              <IconButton
-                size="large"
-                aria-label="show more"
-                aria-controls={mobileMenuId}
-                aria-haspopup="true"
-                onClick={handleMobileMenuOpen}
-                color="inherit"
-              >
-                <MoreIcon />
-              </IconButton>
-            </Box>
           </Toolbar>
         </Container>
       </AppBar>
-      {renderMobileMenu}
-      {renderMenu}
     </Box>
   );
 }
