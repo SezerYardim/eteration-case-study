@@ -14,6 +14,7 @@ import { alpha, styled } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -59,6 +60,7 @@ export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
+    const navigate = useNavigate();
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -144,8 +146,9 @@ export default function PrimarySearchAppBar() {
             <Typography
               variant="h6"
               noWrap
-              component="div"
+              component="button"
               sx={{ display: { xs: "none", sm: "block" }, fontWeight: "700" }}
+              onClick={() => navigate("/")}
             >
               Eteration
             </Typography>
