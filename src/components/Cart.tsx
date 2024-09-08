@@ -1,11 +1,12 @@
 import { Box, Card, CardContent, Typography } from "@mui/material";
-import CartNumberInput from "./CartNumberInput";
-interface CartProps {
-  name: string;
-  price: string;
-  count: number;
-}
-export default function Cart({ name, count, price }: CartProps) {
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { decrementCount, incrementCount } from "../store/slices/cartSlice";
+import CartItem from "./CartItem";
+
+export default function Cart() {
+  const cartList = useAppSelector((state) => state.cart);
+
+  const dispatch = useAppDispatch();
   return (
     <Box sx={{ marginBottom: "12px" }}>
       <Typography component={"p"} variant="subtitle1" color="textSecondary">
@@ -13,13 +14,14 @@ export default function Cart({ name, count, price }: CartProps) {
       </Typography>
       <Card>
         <CardContent>
-          <Typography variant="subtitle1" fontWeight={500} color="textPrimary">
-            {name}
-          </Typography>
-          <Typography variant="subtitle1" fontWeight={500} color="primary">
-            {price + " ₺"}
-          </Typography>
-          <CartNumberInput count={count}></CartNumberInput>
+          {cartList.items.map((item) => (
+            <CartItem
+              key={item.product.id}
+              onDecrement={() => dispatch(decrementCount(item))}
+              onIncrement={() => dispatch(incrementCount(item))}
+              {...item}
+            ></CartItem>
+          ))}
         </CardContent>
       </Card>
     </Box>

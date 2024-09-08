@@ -3,6 +3,7 @@ import createSagaMiddleware from "redux-saga";
 import rootSaga from "./sagas";
 import productDetailsSlice from "./slices/productDetailsSlice";
 import productListSlice from "./slices/productListSlice";
+import cartSlice from "./slices/cartSlice";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -10,6 +11,7 @@ export const store = configureStore({
   reducer: {
     productList: productListSlice,
     productDetails: productDetailsSlice,
+    cart: cartSlice,
   },
   middleware(getDefaultMiddleware) {
     return getDefaultMiddleware().concat(sagaMiddleware);

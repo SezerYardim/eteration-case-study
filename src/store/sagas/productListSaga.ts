@@ -1,15 +1,16 @@
-import { call, put, takeLatest } from "redux-saga/effects";
+import { PayloadAction } from "@reduxjs/toolkit";
+import { call, put, select, takeLatest } from "redux-saga/effects";
 import { getProductList } from "../../api/products/product";
 import {
   IProductFilter,
   IProductListItem,
 } from "../../api/products/products.interface";
 import {
+  changeCurrentPage,
   getProductListRequest,
   getProductListRequestError,
   getProductListRequestSuccess,
 } from "../slices/productListSlice";
-import { PayloadAction } from "@reduxjs/toolkit";
 
 export function* productListSaga({
   payload: queryParams,
@@ -21,10 +22,23 @@ export function* productListSaga({
     );
     yield put(getProductListRequestSuccess(productList));
   } catch (error) {
-    yield put(getProductListRequestError(error as string));
+    yield put(getProductListRequestError((error as unknown as Error).message));
+  }
+}
+
+export function* filterSaga() {
+  const filter: IProductFilter = yield select(
+    (state) => state.productList.filter
+  );
+  try {
+    const productList: IProductListItem[] = yield call(getProductList, filter);
+    yield put(getProductListRequestSuccess(productList));
+  } catch (error) {
+    yield put(getProductListRequestError((error as unknown as Error).message));
   }
 }
 
 export function* watchProductListSaga() {
   yield takeLatest(getProductListRequest.type, productListSaga);
+  yield takeLatest(changeCurrentPage.type, filterSaga);
 }

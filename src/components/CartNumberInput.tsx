@@ -1,8 +1,14 @@
 import { Box, Button, Typography } from "@mui/material";
 interface CartNumberInputProps {
   count: number;
+  onIncrement(): void;
+  onDecrement(): void;
 }
-export default function CartNumberInput({ count }: CartNumberInputProps) {
+export default function CartNumberInput({
+  count,
+  onDecrement,
+  onIncrement,
+}: CartNumberInputProps) {
   return (
     <Box display="flex">
       <Button
@@ -14,6 +20,7 @@ export default function CartNumberInput({ count }: CartNumberInputProps) {
           boxShadow: 0,
         }}
         variant="contained"
+        onClick={onDecrement}
       >
         -
       </Button>
@@ -39,6 +46,7 @@ export default function CartNumberInput({ count }: CartNumberInputProps) {
           boxShadow: 0,
         }}
         variant="contained"
+        onClick={onIncrement}
       >
         +
       </Button>

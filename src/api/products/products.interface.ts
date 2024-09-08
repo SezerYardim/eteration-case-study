@@ -4,17 +4,12 @@ export interface IProductDetails {
 
 export interface IProductFilter {
   search?: string;
-  filter?: string;
   title?: string;
-  page?: number;
   p?: number;
-  limit?: number;
   l?: number;
   sortBy?: string;
-  sortby?: string;
   orderBy?: string;
-  orderby?: string;
-  order?: string;
+  order?: "asc" | "desc";
 }
 
 export interface IProductDetails {

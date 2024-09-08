@@ -2,7 +2,9 @@ import { Grid2 as Grid } from "@mui/material";
 import Cart from "../components/Cart";
 import Checkout from "../components/Checkout";
 import ProductDetailsCard from "../components/ProductDetailsCard";
+import { useAppSelector } from "../store/hooks";
 export default function ProductDetailsView() {
+  const checkout = useAppSelector((state) => state.cart.checkout);
   return (
     <Grid container columnGap={"30px"} wrap="nowrap">
       <Grid size={10} container>
@@ -14,8 +16,8 @@ Tempore quo molestiae fugit ipsam quos dolores, recusandae exercitationem nam! M
         ></ProductDetailsCard>
       </Grid>
       <Grid size={2}>
-        <Cart name="Samsung s22" price="12.000₺" count={1}></Cart>
-        <Checkout price={11700}></Checkout>
+        <Cart></Cart>
+        <Checkout price={checkout}></Checkout>
       </Grid>
     </Grid>
   );
