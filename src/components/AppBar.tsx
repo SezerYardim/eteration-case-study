@@ -15,6 +15,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "../store/hooks";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -60,7 +61,8 @@ export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const checkout = useAppSelector((state) => state.cart.checkout);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -167,7 +169,7 @@ export default function PrimarySearchAppBar() {
                 startIcon={<WalletIconOutlined />}
                 sx={{ color: "white" }}
               >
-                1010 TL
+                {checkout + "₺"}
               </Button>
 
               <Button
