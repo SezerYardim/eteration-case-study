@@ -1,6 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {
+  IProductFilter,
+  IProductListItem,
+} from "../../api/products/products.interface";
 import { StateType } from "../sagas";
-import { IProductListItem } from "../../api/products/products.interface";
 
 type IProductListState = StateType<IProductListItem[]>;
 const initialState: IProductListState = {
@@ -12,7 +15,10 @@ export const productListSlice = createSlice({
   name: "productList",
   initialState,
   reducers: {
-    getProductListRequest(state: IProductListState) {
+    getProductListRequest(
+      state: IProductListState,
+      queryParams: PayloadAction<IProductFilter>
+    ) {
       state.errors = "";
       state.isLoading = true;
     },

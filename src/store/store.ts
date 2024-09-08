@@ -6,7 +6,7 @@ import productListSlice from "./slices/productListSlice";
 
 const sagaMiddleware = createSagaMiddleware();
 
-export default configureStore({
+export const store = configureStore({
   reducer: {
     productList: productListSlice,
     productDetails: productDetailsSlice,
@@ -17,3 +17,6 @@ export default configureStore({
 });
 
 sagaMiddleware.run(rootSaga);
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;

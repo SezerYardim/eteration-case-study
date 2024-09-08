@@ -4,24 +4,21 @@ import {
   CardActionArea,
   CardActions,
   CardContent,
-  CardMedia,
-  Typography,
+  Typography
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { IProductListItem } from "../api/products/products.interface";
 
-export default function ProductCard() {
+type ProductCardProps = {product: IProductListItem}
+export default function ProductCard({product}:ProductCardProps) {
+  const navigate = useNavigate();
   return (
-    <Card>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          height={150}
-          width={150}
-          image=""
-          alt="Product_Image"
-        />
+    <Card sx={{width: "180px"}}>
+      <CardActionArea onClick={() => navigate("/"+ product.id)}>
         <CardContent>
-          <Typography></Typography>
-          <Typography></Typography>
+          <img src={product.image} alt="Product Image" height={150} width={150} />
+          <Typography>{product?.price}</Typography>
+          <Typography>{product?.name}</Typography>
         </CardContent>
         <CardActionArea>
           <CardActions>
