@@ -3,7 +3,7 @@ import { call, put, select, takeLatest } from "redux-saga/effects";
 import { getProductList } from "../../api/products/product";
 import {
   IProductFilter,
-  IProductListItem,
+  IProductItem,
 } from "../../api/products/products.interface";
 import {
   changeCurrentPage,
@@ -16,7 +16,7 @@ export function* productListSaga({
   payload: queryParams,
 }: PayloadAction<IProductFilter>) {
   try {
-    const productList: IProductListItem[] = yield call(
+    const productList: IProductItem[] = yield call(
       getProductList,
       queryParams
     );
@@ -31,7 +31,7 @@ export function* filterSaga() {
     (state) => state.productList.filter
   );
   try {
-    const productList: IProductListItem[] = yield call(getProductList, filter);
+    const productList: IProductItem[] = yield call(getProductList, filter);
     yield put(getProductListRequestSuccess(productList));
   } catch (error) {
     yield put(getProductListRequestError((error as unknown as Error).message));

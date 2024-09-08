@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IProductListItem } from "../../api/products/products.interface";
+import { IProductItem } from "../../api/products/products.interface";
 
 export interface ICartSliceState {
   items: ICartItem[];
@@ -7,7 +7,7 @@ export interface ICartSliceState {
 }
 
 export interface ICartItem {
-  product: IProductListItem;
+  product: IProductItem;
   count: number;
 }
 const initialState: ICartSliceState = {

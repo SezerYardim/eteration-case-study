@@ -12,17 +12,7 @@ export interface IProductFilter {
   order?: "asc" | "desc";
 }
 
-export interface IProductDetails {
-  createdAt: string;
-  name: string;
-  image: string;
-  price: string;
-  description: string;
-  model: string;
-  brand: string;
-  id: string;
-}
-export interface IProductListItem {
+export interface IProductItem {
   createdAt: string;
   name: string;
   image: string;

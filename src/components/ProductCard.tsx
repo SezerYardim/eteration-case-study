@@ -7,11 +7,11 @@ import {
   Typography,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { IProductListItem } from "../api/products/products.interface";
+import { IProductItem } from "../api/products/products.interface";
 import { useAppDispatch } from "../store/hooks";
 import { addToCart } from "../store/slices/cartSlice";
 
-type ProductCardProps = { product: IProductListItem };
+type ProductCardProps = { product: IProductItem };
 export default function ProductCard({ product }: ProductCardProps) {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();

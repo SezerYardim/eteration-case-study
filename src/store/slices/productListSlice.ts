@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   IProductFilter,
-  IProductListItem,
+  IProductItem,
 } from "../../api/products/products.interface";
 import { StateType } from "../sagas";
 
-export type IProductListState = StateType<IProductListItem[]> & {
+export type IProductListState = StateType<IProductItem[]> & {
   filter: IProductFilter;
 };
 const initialState: IProductListState = {
@@ -36,7 +36,7 @@ export const productListSlice = createSlice({
     },
     getProductListRequestSuccess(
       state: IProductListState,
-      { payload: productList }: PayloadAction<IProductListItem[]>
+      { payload: productList }: PayloadAction<IProductItem[]>
     ) {
       state.errors = "";
       state.isLoading = false;
