@@ -9,15 +9,18 @@ import SortByFilter from "../components/SortByFilter";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import {
   changeCurrentPage,
-  getProductListRequest,
-} from "../store/slices/productListSlice";
+  setBrandsRequest,
+} from "../store/slices/filterSlice";
+import { getProductListRequest } from "../store/slices/productListSlice";
 
 export default function ProductListView() {
   const dispatch = useAppDispatch();
   const productList = useAppSelector((state) => state.productList);
   const checkout = useAppSelector((state) => state.cart.checkout);
+  const page = useAppSelector((state) => state.filter.filter.p);
   useEffect(() => {
     dispatch(getProductListRequest({ l: 12, p: 1 }));
+    dispatch(setBrandsRequest());
   }, []);
   return (
     <Grid container columnGap={"30px"} wrap="nowrap">
@@ -38,7 +41,7 @@ export default function ProductListView() {
         ))}
 
         <Pagination
-          page={productList.filter.p}
+          page={page}
           count={7}
           onChange={(_event, page) => dispatch(changeCurrentPage(page))}
         ></Pagination>

@@ -1,16 +1,15 @@
 export interface IProductDetails {
   id: string;
 }
-
-export interface IProductFilter {
+type IFieldFilter = Partial<Record<keyof IProductItem, string>>;
+export type IProductFilter = {
   search?: string;
-  title?: string;
   p?: number;
   l?: number;
   sortBy?: string;
   orderBy?: string;
   order?: "asc" | "desc";
-}
+} & IFieldFilter;
 
 export interface IProductItem {
   createdAt: string;

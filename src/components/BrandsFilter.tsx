@@ -1,3 +1,4 @@
+import SearchIcon from "@mui/icons-material/Search";
 import {
   alpha,
   Card,
@@ -10,7 +11,12 @@ import {
   RadioGroup,
   styled,
 } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import {
+  getBrands,
+  setSearchBrand,
+  setSelectedBrand,
+} from "../store/slices/filterSlice";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -47,6 +53,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 export default function BrandsFilter() {
+  const dispatch = useAppDispatch();
+  const state = useAppSelector((state) => state);
+  const brands = getBrands(state);
   return (
     <FormControl sx={{ display: "block", marginBottom: "12px" }}>
       <FormLabel id="brands-filter-card-label">Brands</FormLabel>
@@ -59,24 +68,31 @@ export default function BrandsFilter() {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
+              onChange={(event) => dispatch(setSearchBrand(event.target.value))}
             />
           </Search>
           <RadioGroup
+            sx={{ maxHeight: "83px", display: "block", overflowY: "auto" }}
             aria-labelledby="brands-filter-card-label"
-            defaultValue="apple"
+            defaultValue=""
             name="brands-filter"
+            onChange={(event) =>
+              dispatch(
+                setSelectedBrand({
+                  brand: event.target.value,
+                })
+              )
+            }
           >
-            <FormControlLabel value="apple" control={<Radio />} label="Apple" />
-            <FormControlLabel
-              value="samsung"
-              control={<Radio />}
-              label="Samsung"
-            />
-            <FormControlLabel
-              value="huawei"
-              control={<Radio />}
-              label="Huawei"
-            />
+            {brands.map((brand) => (
+              <FormControlLabel
+                key={brand}
+                value={brand}
+                control={<Radio />}
+                label={brand}
+                sx={{ display: "flex" }}
+              />
+            ))}
           </RadioGroup>
         </CardContent>
       </Card>

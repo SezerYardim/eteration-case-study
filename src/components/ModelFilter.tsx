@@ -1,3 +1,4 @@
+import SearchIcon from "@mui/icons-material/Search";
 import {
   alpha,
   Card,
@@ -10,7 +11,12 @@ import {
   RadioGroup,
   styled,
 } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import {
+  getModels,
+  setSearchModel,
+  setSelectedModel,
+} from "../store/slices/filterSlice";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -47,6 +53,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 export default function ModelFilter() {
+  const dispatch = useAppDispatch();
+  const state = useAppSelector((state) => state);
+  const models = getModels(state);
   return (
     <FormControl sx={{ display: "block", marginBottom: "12px" }}>
       <FormLabel id="model-filter-label">Model</FormLabel>
@@ -59,24 +68,33 @@ export default function ModelFilter() {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
+              onChange={(event) => {
+                dispatch(setSearchModel(event.target.value));
+              }}
             />
           </Search>
           <RadioGroup
+            sx={{ maxHeight: "83px", display: "block", overflowY: "auto" }}
             aria-labelledby="model-filter-label"
-            defaultValue="apple"
+            defaultValue=""
             name="brands-filter"
+            onChange={(event) =>
+              dispatch(
+                setSelectedModel({
+                  model: event.target.value,
+                })
+              )
+            }
           >
-            <FormControlLabel value="apple" control={<Radio />} label="Apple" />
-            <FormControlLabel
-              value="samsung"
-              control={<Radio />}
-              label="Samsung"
-            />
-            <FormControlLabel
-              value="huawei"
-              control={<Radio />}
-              label="Huawei"
-            />
+            {models.map((model) => (
+              <FormControlLabel
+                key={model}
+                value={model}
+                control={<Radio />}
+                label={model}
+                sx={{ display: "flex" }}
+              />
+            ))}
           </RadioGroup>
         </CardContent>
       </Card>

@@ -4,23 +4,13 @@ import {
   IProductItem,
 } from "../../api/products/products.interface";
 import { StateType } from "../sagas";
+import { IFilterType } from "./filterSlice";
 
-export type IProductListState = StateType<IProductItem[]> & {
-  filter: IProductFilter;
-};
+export type IProductListState = StateType<IProductItem[]>;
 const initialState: IProductListState = {
   data: [],
   isLoading: false,
   errors: "",
-  filter: {
-    search: undefined,
-    l: 12,
-    sortBy: undefined,
-    order: "desc",
-    orderBy: "createdAt",
-    p: 1,
-    title: undefined,
-  },
 };
 export const productListSlice = createSlice({
   name: "productList",
@@ -28,11 +18,11 @@ export const productListSlice = createSlice({
   reducers: {
     getProductListRequest(
       state: IProductListState,
-      { payload: filter }: PayloadAction<IProductFilter>
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      { payload:_ }: PayloadAction<Partial<IProductFilter>>
     ) {
       state.errors = "";
       state.isLoading = true;
-      state.filter = filter;
     },
     getProductListRequestSuccess(
       state: IProductListState,
@@ -50,18 +40,6 @@ export const productListSlice = createSlice({
       state.isLoading = true;
       state.data = [];
     },
-    setFilter(
-      state: IProductListState,
-      { payload: queryParams }: PayloadAction<IProductFilter>
-    ) {
-      state.filter = queryParams;
-    },
-    changeCurrentPage(
-      state: IProductListState,
-      { payload: currentPage }: PayloadAction<number>
-    ) {
-      state.filter.p = currentPage;
-    },
   },
 });
 
@@ -69,7 +47,11 @@ export const {
   getProductListRequest,
   getProductListRequestError,
   getProductListRequestSuccess,
-  changeCurrentPage,
-  setFilter,
 } = productListSlice.actions;
 export default productListSlice.reducer;
+
+export function getProductListActionCreator({
+  payload: queryParams,
+}: PayloadAction<IFilterType>) {
+  return { type: "FETCH_PRODUCT_LIST", payload: queryParams.filter };
+}
