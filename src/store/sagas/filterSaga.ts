@@ -14,6 +14,7 @@ import {
   setModels,
   setSelectedBrand,
   setSelectedModel,
+  setSortByFilter,
 } from "../slices/filterSlice";
 import { getProductListRequest } from "../slices/productListSlice";
 
@@ -39,9 +40,15 @@ export function* setSelectedBrandSaga({ payload }: PayloadAction<BrandFilter>) {
 }
 
 export function* watchFilterSaga() {
-  yield takeEvery(setFilter.type, filterSaga);
+  yield takeEvery(
+    [
+      setFilter.type,
+      setSelectedModel.type,
+      changeCurrentPage.type,
+      setSortByFilter.type,
+    ],
+    filterSaga
+  );
   yield takeEvery(setBrandsRequest.type, setBrandsSaga);
   yield takeEvery(setSelectedBrand.type, setSelectedBrandSaga);
-  yield takeEvery(setSelectedModel.type, filterSaga);
-  yield takeEvery(changeCurrentPage.type, filterSaga);
 }

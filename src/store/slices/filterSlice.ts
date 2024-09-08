@@ -117,6 +117,33 @@ export const filterSlice = createSlice({
     ) {
       state.searchModel = searchModel;
     },
+    setSortByFilter(
+      state: IFilterType,
+      { payload: sortBy }: PayloadAction<string>
+    ) {
+      switch (sortBy) {
+        case "dateDesc":
+          state.filter.orderBy = "createdAt";
+          state.filter.order = "desc";
+          break;
+        case "dateAsc":
+          state.filter.orderBy = "createdAt";
+          state.filter.order = "asc";
+          break;
+        case "priceDesc":
+          state.filter.orderBy = "price";
+          state.filter.order = "desc";
+          break;
+        case "priceAsc":
+          state.filter.orderBy = "price";
+          state.filter.order = "asc";
+          break;
+        default:
+          state.filter.orderBy = "createdAt";
+          state.filter.order = "desc";
+          break;
+      }
+    },
   },
 });
 
@@ -130,6 +157,7 @@ export const {
   changeCurrentPage,
   setSearchBrand,
   setSearchModel,
+  setSortByFilter,
 } = filterSlice.actions;
 export default filterSlice.reducer;
 

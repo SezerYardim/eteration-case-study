@@ -19,7 +19,9 @@ export default function ProductListView() {
   const checkout = useAppSelector((state) => state.cart.checkout);
   const page = useAppSelector((state) => state.filter.filter.p);
   useEffect(() => {
-    dispatch(getProductListRequest({ l: 12, p: 1 }));
+    dispatch(
+      getProductListRequest({ l: 12, p: 1, orderBy: "createdAt", order: "asc" })
+    );
     dispatch(setBrandsRequest());
   }, []);
   return (

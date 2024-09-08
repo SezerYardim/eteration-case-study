@@ -7,8 +7,11 @@ import {
   Radio,
   RadioGroup,
 } from "@mui/material";
+import { useAppDispatch } from "../store/hooks";
+import { setSortByFilter } from "../store/slices/filterSlice";
 
 export default function SortByFilter() {
+  const dispatch = useAppDispatch();
   return (
     <FormControl sx={{ display: "block", marginBottom: "12px" }}>
       <FormLabel id="sort-by-filter-group-label">Sort by</FormLabel>
@@ -16,16 +19,19 @@ export default function SortByFilter() {
         <CardContent>
           <RadioGroup
             aria-labelledby="sort-by-filter-group-label"
-            defaultValue="dateDesc"
+            defaultValue="dateAsc"
+            onChange={(event) => {
+              dispatch(setSortByFilter(event.target.value));
+            }}
             name="radio-buttons-group"
           >
             <FormControlLabel
-              value="dateDesc"
+              value="dateAsc"
               control={<Radio />}
               label="Old to new"
             />
             <FormControlLabel
-              value="dateAsc"
+              value="dateDesc"
               control={<Radio />}
               label="New to old"
             />
