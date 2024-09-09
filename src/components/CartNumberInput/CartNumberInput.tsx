@@ -26,6 +26,7 @@ export default function CartNumberInput({
       </Button>
       <Typography
         variant="button"
+        data-testid="cart-product-count"
         component={Button}
         sx={{
           lineHeight: 1,
