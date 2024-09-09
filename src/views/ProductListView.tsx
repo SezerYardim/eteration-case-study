@@ -1,5 +1,7 @@
 import { Grid2 as Grid, Pagination } from "@mui/material";
 import { useEffect } from "react";
+import BrandsFilter from "../components/BrandsFilter/BrandsFilter";
+import Cart from "../components/Cart/Cart";
 import Checkout from "../components/Checkout/Checkout";
 import ModelFilter from "../components/ModelFilter/ModelFilter";
 import ProductCard from "../components/ProductCard/ProductCard";
@@ -11,8 +13,6 @@ import {
   setBrandsRequest,
 } from "../store/slices/filterSlice";
 import { getProductListRequest } from "../store/slices/productListSlice";
-import BrandsFilter from "../components/BrandsFilter/BrandsFilter";
-import Cart from "../components/Cart/Cart";
 
 export default function ProductListView() {
   const dispatch = useAppDispatch();

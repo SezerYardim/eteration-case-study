@@ -60,9 +60,21 @@ export const cartSlice = createSlice({
         return acc;
       }, 0);
     },
+    setCart(
+      state: ICartSliceState,
+      { payload: cart }: PayloadAction<ICartSliceState>
+    ) {
+      state.checkout = cart.checkout;
+      state.items = cart.items;
+    },
   },
 });
 
-export const { addToCart, decrementCount, incrementCount, setCheckout } =
-  cartSlice.actions;
+export const {
+  addToCart,
+  decrementCount,
+  incrementCount,
+  setCheckout,
+  setCart,
+} = cartSlice.actions;
 export default cartSlice.reducer;
