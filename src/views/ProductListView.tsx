@@ -23,11 +23,11 @@ export default function ProductListView() {
   useEffect(() => {
     dispatch(getProductListRequest());
     dispatch(setBrandsRequest());
-    dispatch(getSize())
+    dispatch(getSize());
   }, []);
   return (
     <Grid container columnGap={"30px"} wrap="nowrap">
-      <Grid size={2}>
+      <Grid size={2} sx={{ display: { xs: "none", lg: "block" } }}>
         <SortByFilter></SortByFilter>
         <BrandsFilter></BrandsFilter>
         <ModelFilter></ModelFilter>

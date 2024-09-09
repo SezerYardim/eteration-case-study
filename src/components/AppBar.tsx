@@ -1,6 +1,6 @@
 import PersonIconOutlined from "@mui/icons-material/PersonOutlined";
 import WalletIconOutlined from "@mui/icons-material/WalletOutlined";
-import { Container } from "@mui/material";
+import { Container, IconButton } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -10,22 +10,39 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { setSearchText } from "../store/slices/filterSlice";
 import SearchInput from "./SearchInput";
+import MenuIcon from "@mui/icons-material/Menu";
+import { useState } from "react";
+import DrawerAppBar from "./DrawerAppBar";
 
 export default function PrimarySearchAppBar() {
   const navigate = useNavigate();
   const checkout = useAppSelector((state) => state.cart.checkout);
   const dispatch = useAppDispatch();
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const handleDrawerToggle = () => {
+    setMobileOpen((prevState) => !prevState);
+  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{ mr: 2, display: { lg: "none" } }}
+            >
+              <MenuIcon />
+            </IconButton>
+
             <Typography
               variant="h6"
               noWrap
               component="button"
-              sx={{ display: { xs: "none", sm: "block" }, fontWeight: "700" }}
+              sx={{ display: { xs: "none", lg: "block" }, fontWeight: "700" }}
               onClick={() => navigate("/")}
             >
               Eteration
@@ -56,6 +73,10 @@ export default function PrimarySearchAppBar() {
           </Toolbar>
         </Container>
       </AppBar>
+      <DrawerAppBar
+        isOpen={mobileOpen}
+        onToggleDrawer={handleDrawerToggle}
+      ></DrawerAppBar>
     </Box>
   );
 }
