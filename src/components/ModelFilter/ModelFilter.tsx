@@ -7,14 +7,14 @@ import {
   Radio,
   RadioGroup,
 } from "@mui/material";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import {
   getModels,
   setSearchModel,
   setSelectedModel,
-} from "../store/slices/filterSlice";
-import SearchInput from "./SearchInput";
-import InfoCaption from "./InfoCaption";
+} from "../../store/slices/filterSlice";
+import SearchInput from "../SearchInput/SearchInput";
+import InfoCaption from "../InfoCaption/InfoCaption";
 
 export default function ModelFilter() {
   const dispatch = useAppDispatch();

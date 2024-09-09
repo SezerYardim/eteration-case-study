@@ -1,12 +1,12 @@
 import { Grid2 as Grid } from "@mui/material";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Cart from "../components/Cart";
-import Checkout from "../components/Checkout";
-import ProductDetailsCard from "../components/ProductDetailsCard";
+import Checkout from "../components/Checkout/Checkout";
+import ProductDetailsCard from "../components/ProductDetailsCard/ProductDetailsCard";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { getProductDetailsRequest } from "../store/slices/productDetailsSlice";
 import { addToCart } from "../store/slices/cartSlice";
+import Cart from "../components/Cart/Cart";
 
 export default function ProductDetailsView() {
   const checkout = useAppSelector((state) => state.cart.checkout);

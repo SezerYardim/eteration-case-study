@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
-import { ICartItem } from "../store/slices/cartSlice";
-import CartNumberInput from "./CartNumberInput";
+import { ICartItem } from "../../store/slices/cartSlice";
+import CartNumberInput from "../CartNumberInput/CartNumberInput";
 
 interface CartItemProps extends ICartItem {
   onIncrement(): void;

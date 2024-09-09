@@ -7,12 +7,12 @@ import Button from "@mui/material/Button";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { setSearchText } from "../store/slices/filterSlice";
-import SearchInput from "./SearchInput";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { setSearchText } from "../../store/slices/filterSlice";
+import SearchInput from "../SearchInput/SearchInput";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
-import DrawerAppBar from "./DrawerAppBar";
+import DrawerAppBar from "../DrawerAppBar/DrawerAppBar";
 
 export default function PrimarySearchAppBar() {
   const navigate = useNavigate();

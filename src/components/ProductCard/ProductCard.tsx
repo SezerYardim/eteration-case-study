@@ -7,9 +7,9 @@ import {
   Typography,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { IProductItem } from "../api/products/products.interface";
-import { useAppDispatch } from "../store/hooks";
-import { addToCart } from "../store/slices/cartSlice";
+import { IProductItem } from "../../api/products/products.interface";
+import { useAppDispatch } from "../../store/hooks";
+import { addToCart } from "../../store/slices/cartSlice";
 
 type ProductCardProps = { product: IProductItem };
 export default function ProductCard({ product }: ProductCardProps) {

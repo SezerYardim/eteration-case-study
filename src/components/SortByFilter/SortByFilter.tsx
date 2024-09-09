@@ -7,8 +7,8 @@ import {
   Radio,
   RadioGroup,
 } from "@mui/material";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { setSortByFilter } from "../store/slices/filterSlice";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { setSortByFilter } from "../../store/slices/filterSlice";
 
 export default function SortByFilter() {
   const dispatch = useAppDispatch();

@@ -4,9 +4,10 @@ import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
-import BrandsFilter from "./BrandsFilter";
-import ModelFilter from "./ModelFilter";
-import SortByFilter from "./SortByFilter";
+
+import ModelFilter from "../ModelFilter/ModelFilter";
+import SortByFilter from "../SortByFilter/SortByFilter";
+import BrandsFilter from "../BrandsFilter/BrandsFilter";
 
 type DrawerAppBarProps = {
   onToggleDrawer: () => void;

@@ -1,8 +1,9 @@
 import { Box, Card, Typography } from "@mui/material";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { decrementCount, incrementCount } from "../store/slices/cartSlice";
-import CartItem from "./CartItem";
-import InfoCaption from "./InfoCaption";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import CartItem from "../CartItem/CartItem";
+import { decrementCount, incrementCount } from "../../store/slices/cartSlice";
+import InfoCaption from "../InfoCaption/InfoCaption";
+
 
 export default function Cart() {
   const cartList = useAppSelector((state) => state.cart);

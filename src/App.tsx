@@ -1,7 +1,7 @@
 import { Container } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import "./App.css";
-import PrimarySearchAppBar from "./components/AppBar";
+import PrimarySearchAppBar from "./components/AppBar/AppBar";
 
 function App() {
   return (

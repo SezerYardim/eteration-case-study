@@ -1,5 +1,5 @@
 import { Box, Button, Card, Typography } from "@mui/material";
-import { IProductItem } from "../api/products/products.interface";
+import { IProductItem } from "../../api/products/products.interface";
 
 interface ProductDetailsCardProps {
   product: IProductItem;
