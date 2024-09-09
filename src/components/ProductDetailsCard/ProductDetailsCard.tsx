@@ -14,6 +14,7 @@ export default function ProductDetailsCard({
       sx={{
         padding: "10px",
         display: "flex",
+        flexDirection: { xs: "column", lg: "row" },
         columnGap: "10px",
         minHeight: "320px",
       }}

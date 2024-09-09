@@ -26,17 +26,26 @@ export default function ProductListView() {
     dispatch(getSize());
   }, []);
   return (
-    <Grid container columnGap={"30px"} wrap="nowrap">
-      <Grid size={2} sx={{ display: { xs: "none", lg: "block" } }}>
+    <Grid
+      container
+      columnGap={{ xs: "8px", md: "30px" }}
+      rowGap={{ xs: "8px", md: "30px" }}
+      wrap="nowrap"
+      flexDirection={{ xs: "column", md: "row" }}
+    >
+      <Grid
+        size={2}
+        sx={{ display: { xs: "none", lg: "block", order: { xs: 3, md: 1 } } }}
+      >
         <SortByFilter></SortByFilter>
         <BrandsFilter></BrandsFilter>
         <ModelFilter></ModelFilter>
       </Grid>
-      <Grid size={8}>
+      <Grid size={{ xs: 12, md: 8 }} sx={{ order: 2 }}>
         <Grid
           container
-          rowGap={"26px"}
-          columnGap={"30px"}
+          rowGap={{ xs: "8px", md: "26px" }}
+          columnGap={{ xs: "8px", md: "30px" }}
           justifyContent={"center"}
           marginBottom="24px"
         >
@@ -52,7 +61,7 @@ export default function ProductListView() {
           ></Pagination>
         </Grid>
       </Grid>
-      <Grid size={2}>
+      <Grid size={{ xs: 12, md: 2 }} order={{ xs: 1, md: 3 }}>
         <Cart />
         <Checkout price={checkout}></Checkout>
       </Grid>
