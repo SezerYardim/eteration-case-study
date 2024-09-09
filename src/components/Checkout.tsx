@@ -10,8 +10,8 @@ export default function Checkout({ price }: CheckoutProps) {
       </Typography>
       <Card>
         <CardContent>
-          <Typography variant="subtitle1" color="textSecondary">
-            Total Price {price}
+          <Typography variant="subtitle1" color="primary">
+            Total Price: {price + "₺"}
           </Typography>
           <Button sx={{ width: "100%" }} variant="contained">
             Checkout

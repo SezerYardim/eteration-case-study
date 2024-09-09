@@ -13,6 +13,7 @@ import {
   setSearchBrand,
   setSelectedBrand,
 } from "../store/slices/filterSlice";
+import InfoCaption from "./InfoCaption";
 import SearchInput from "./SearchInput";
 
 export default function BrandsFilter() {
@@ -25,35 +26,43 @@ export default function BrandsFilter() {
       <FormLabel id="brands-filter-card-label">Brands</FormLabel>
       <Card>
         <CardContent>
-          <SearchInput
-            placeholder="Search…"
-            inputProps={{ "aria-label": "search" }}
-            onChange={(event) => dispatch(setSearchBrand(event.target.value))}
-          />
-          <RadioGroup
-            sx={{ maxHeight: "83px", display: "block", overflowY: "auto" }}
-            aria-labelledby="brands-filter-card-label"
-            defaultValue=""
-            name="brands-filter"
-            value={selectedBrand.brand}
-            onChange={(event) =>
-              dispatch(
-                setSelectedBrand({
-                  brand: event.target.value,
-                })
-              )
-            }
-          >
-            {brands.map((brand) => (
-              <FormControlLabel
-                key={brand}
-                value={brand}
-                control={<Radio />}
-                label={brand}
-                sx={{ display: "flex" }}
+          {brands.length ? (
+            <>
+              <SearchInput
+                placeholder="Search…"
+                inputProps={{ "aria-label": "search" }}
+                onChange={(event) =>
+                  dispatch(setSearchBrand(event.target.value))
+                }
               />
-            ))}
-          </RadioGroup>
+              <RadioGroup
+                sx={{ maxHeight: "83px", display: "block", overflowY: "auto" }}
+                aria-labelledby="brands-filter-card-label"
+                defaultValue=""
+                name="brands-filter"
+                value={selectedBrand.brand}
+                onChange={(event) =>
+                  dispatch(
+                    setSelectedBrand({
+                      brand: event.target.value,
+                    })
+                  )
+                }
+              >
+                {brands.map((brand) => (
+                  <FormControlLabel
+                    key={brand}
+                    value={brand}
+                    control={<Radio />}
+                    label={brand}
+                    sx={{ display: "flex" }}
+                  />
+                ))}
+              </RadioGroup>
+            </>
+          ) : (
+            <InfoCaption caption="There is no brand" />
+          )}
         </CardContent>
       </Card>
     </FormControl>
