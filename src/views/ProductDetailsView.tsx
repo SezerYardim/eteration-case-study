@@ -25,8 +25,14 @@ export default function ProductDetailsView() {
     }
   }
   return (
-    <Grid container columnGap={"30px"} wrap="nowrap">
-      <Grid size={10} container>
+    <Grid
+      container
+      columnGap={{ xs: "8px", md: "30px" }}
+      rowGap={{ xs: "8px", md: "30px" }}
+      wrap="nowrap"
+      flexDirection={{ xs: "column", md: "row" }}
+    >
+      <Grid size={{ xs: 12, md: 9 }} sx={{ order: 2 }} container>
         {productDetails.state.data && (
           <ProductDetailsCard
             product={productDetails.state.data}
@@ -34,7 +40,7 @@ export default function ProductDetailsView() {
           ></ProductDetailsCard>
         )}
       </Grid>
-      <Grid size={2}>
+      <Grid size={{ xs: 12, md: 3 }} order={{ xs: 1, md: 3 }}>
         <Cart></Cart>
         <Checkout price={checkout}></Checkout>
       </Grid>
